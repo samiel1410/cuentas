@@ -1,0 +1,6 @@
+[08-Jun-2020 21:43:20 UTC] PHP Warning:  mysqli::__construct(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/ecuabusc/public_html/colecom/login/index.php on line 2
+[08-Jun-2020 21:43:20 UTC] PHP Warning:  mysqli::query(): Couldn't fetch mysqli in /home/ecuabusc/public_html/colecom/login/index.php on line 62
+[08-Jun-2020 21:43:20 UTC] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home/ecuabusc/public_html/colecom/login/index.php on line 63
+[08-Jun-2020 21:46:16 UTC] PHP Warning:  mysqli::__construct(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/ecuabusc/public_html/colecom/login/index.php on line 2
+[08-Jun-2020 21:46:16 UTC] PHP Warning:  mysqli::query(): Couldn't fetch mysqli in /home/ecuabusc/public_html/colecom/login/index.php on line 62
+[08-Jun-2020 21:46:16 UTC] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home/ecuabusc/public_html/colecom/login/index.php on line 63

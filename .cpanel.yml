@@ -1,0 +1,7 @@
+##### THIS ALLOWS US TO DEPLOY THE SITE FROM A GIT REPO ######
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/grupolal/rea.grupolalegion.ec
+    - /bin/cp -R * $DEPLOYPATH
+
