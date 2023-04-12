@@ -61,7 +61,16 @@ if($id_otra_cuenta_cobrar ==""){
     
 }else{
     $datos->actualizarCuentaCobrar(
-        $id_instructor,$nombre_instructor, $apellido_instructor,$telefono_instructor,$celular_instructor ,$direccion_instructor,$titulo_instructor,$estado_instructor,$correo_instructor,$cedula_instructor,$ciudad_instructor,$categoria_instructor
+        $id_otra_cuenta_cobrar,
+        $fecha_emision_otra_cuenta_cobrar,
+        $monto_otra_cuenta_cobrar,
+        $numero_documento_otra_cuenta_cobrar,
+        $obs_otra_cuenta_cobrar,
+        $id_fkcliente_otra_cuenta_cobrar,
+        $id_fktipo_documento_otra_cuenta_cobrar,
+        $id_fksucursal_otra_cuenta_cobrar,
+        $id_fkcentro_costo_otra_cuenta_cobrar,
+        $fecha_vcto_otra_cuenta_cobrar,
         
         );
     

@@ -72,7 +72,7 @@ Ext.define('Legion.view.cuentas.Cuentas_Cobrar', {
                               columnWidth : 0.33,
                               xtype : 'combo',
                               name : 'comboMes',
-                              itemId : 'comboMes',
+                              itemId : 'comboMesCuentaCobrar',
                               fieldLabel : 'Periodo',
                               enableKeyEvents : true,
                               editable : false,
@@ -91,7 +91,7 @@ Ext.define('Legion.view.cuentas.Cuentas_Cobrar', {
                               columnWidth : 0.20,
                               xtype : 'datefield',
                               name : 'buscarPorFechaDesde',
-                              itemId : 'buscarPorFechaDesde',
+                              itemId : 'buscarPorFechaDesdeCuentaCobrar',
                               format : 'Y-m-d',
                               enableKeyEvents : true,
                               emptyText : "Desde"
@@ -100,7 +100,7 @@ Ext.define('Legion.view.cuentas.Cuentas_Cobrar', {
                               columnWidth : 0.20,
                               xtype : 'datefield',
                               name : 'buscarPorFechaHasta',
-                              itemId : 'buscarPorFechaHasta',
+                              itemId : 'buscarPorFechaHastaCuentaCobrar',
                               format : 'Y-m-d',
                               enableKeyEvents : true,
                               emptyText : 'Hasta'
@@ -109,7 +109,7 @@ Ext.define('Legion.view.cuentas.Cuentas_Cobrar', {
                               margin : '5 5 0 5',
                               iconCls : 'fas fa-search',
                               text : 'Ver',
-                              itemId : 'btnBuscarPorRangoGastoMenor',
+                              itemId : 'btnBuscarPorRangoCuentaCobrar',
                               cls : 'botonNuevo',
                               xtype : 'button',
                               style : 'background-color:#3987a8;',
@@ -117,18 +117,11 @@ Ext.define('Legion.view.cuentas.Cuentas_Cobrar', {
         
                             }, {
                               columnWidth : 0.33,
-                              xtype : 'combo',
-                              itemId : 'cuenta',
-                              name : 'cuenta',
-                              allowBlank : false,
-                              editable : false,
-                              valueField : 'id',
-                              displayField : 'nombre',
-                              typeAhead : true,
-                              mode : 'local',
-                              triggerAction : 'all',
-                              fieldLabel : ' Concepto',
-                              store : ''
+                              xtype : 'textfield',
+                              itemId : 'buscarPorObservacionCuentaCobrar',
+                           
+                              fieldLabel : ' Observacion',
+                              
                             }, {
                               columnWidth : 0.33,
                               xtype : "combo",
@@ -148,7 +141,7 @@ Ext.define('Legion.view.cuentas.Cuentas_Cobrar', {
                               columnWidth : 0.33,
                               xtype : 'textfield',
                               name : 'buscarPorNumero',
-                              itemId : 'buscarPorNumero',
+                              itemId : 'buscarPorNumeroCuentaCobrar',
                               fieldLabel : "Número"
                             }
         
@@ -195,16 +188,33 @@ Ext.define('Legion.view.cuentas.Cuentas_Cobrar', {
                       text: "CLIENTE",
                       flex: 1,
                       dataIndex: 'id_fkcliente_otra_cuenta_cobrar',
+                      hidden:true
       
                   },
+                  {
+                    text: "CLIENTE",
+                    flex: 1,
+                    dataIndex: 'nombre_cliente',
+    
+                },
                     {
                       text: "T.DOCUMENTO",
                       flex: 1,
                       dataIndex: 'id_fktipo_documento_otra_cuenta_cobrar',
+
+                      hidden:true,
       
       
       
-                  },{
+                  },
+                  {
+                    text: "T.DOCUMENTO",
+                    flex: 1,
+                    dataIndex: 'nombre_documento_asiento_detalle',
+    
+    
+    
+                },{
                         text: "N.DOCUMENTO",
                         flex: 1,
                         dataIndex: 'numero_documento_otra_cuenta_cobrar',
@@ -228,7 +238,9 @@ Ext.define('Legion.view.cuentas.Cuentas_Cobrar', {
                     {
                         text: "MONTO",
                         flex: 1,
-                        dataIndex: 'monto_otra_cuenta_cobrar'
+                        dataIndex: 'monto_otra_cuenta_cobrar',
+                        renderer: Ext.util.Format.usMoney
+
         
                     },
                     {

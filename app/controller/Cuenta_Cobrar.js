@@ -10,8 +10,11 @@ Ext.define('Legion.controller.Cuenta_Cobrar', {
 
 		
 			
-			'#nombre_busqueda_forma_pago': {
-				specialkey: this.onBusquedaNombre
+			'#buscarPorObservacionCuentaCobrar': {
+				specialkey: this.onBusquedaObservacion
+			},
+			'#buscarPorNumeroCuentaCobrar': {
+				specialkey: this.onBusquedaNumero
 			},
 
 			'#boton_refresh_forma': {
@@ -39,6 +42,12 @@ Ext.define('Legion.controller.Cuenta_Cobrar', {
 			'#action_cuenta_cobrar':{
 				btnDelete : this.onEliminarCuentaCobrar,
 				btnUpdate: this.onEditarCuentaCobrar
+			},
+			'#comboMesCuentaCobrar':{
+				change : this.onBusquedaPeriodo
+			},
+			'#btnBuscarPorRangoCuentaCobrar':{
+				click : this.onBusquedaRango
 			}
 
 		});
@@ -164,6 +173,7 @@ Ext.define('Legion.controller.Cuenta_Cobrar', {
 
 
 		var id = record.data.id_otra_cuenta_cobrar;
+		var nombre_cliente = record.data.nombre_cliente;
 		var cliente = record.data.id_fkcliente_otra_cuenta_cobrar;
 		var fecha_emision = record.data.fecha_emision_otra_cuenta_cobrar;
 		var tipo_documento = record.data.id_fktipo_documento_otra_cuenta_cobrar;
@@ -184,6 +194,9 @@ Ext.define('Legion.controller.Cuenta_Cobrar', {
 
 		Ext.ComponentQuery.query('cuenta_cobrar  #agregarCuentaCobrarForm #id_fkcliente_otra_cuenta_cobrar' )[0]
 			.setValue(cliente);	
+
+			Ext.ComponentQuery.query('cuenta_cobrar  #agregarCuentaCobrarForm #nombre_cliente' )[0]
+			.setValue(nombre_cliente);	
 	
 		Ext.ComponentQuery.query('cuenta_cobrar  #agregarCuentaCobrarForm #fecha_emision_otra_cuenta_cobrar' )[0]
 			.setValue(fecha_emision);
@@ -219,7 +232,123 @@ Ext.define('Legion.controller.Cuenta_Cobrar', {
 
 
 		Ext.ComponentQuery.query('cuenta_cobrar')[0].setActiveItem(1);
+	},
+
+	onBusquedaPeriodo : function(){
+
+		periodo = Ext.ComponentQuery.query('cuenta_cobrar  #gastomenorfitrobusquedaform #comboMesCuentaCobrar' )[0]
+			.getValue();
+
+			store = Ext.getStore('Cuentas_Cobrar');
+			store.getProxy().extraParams={
+				periodo:periodo,
+				desde:"",
+				hasta:"",
+			}
+
+			store.load();
+
+	},
+	onBusquedaRango : function(){
+		inicio = Ext.ComponentQuery.query('cuenta_cobrar  #gastomenorfitrobusquedaform #buscarPorFechaDesdeCuentaCobrar' )[0]
+			.getValue();
+
+			fin = Ext.ComponentQuery.query('cuenta_cobrar  #gastomenorfitrobusquedaform #buscarPorFechaHastaCuentaCobrar' )[0]
+			.getValue();
+
+			store = Ext.getStore('Cuentas_Cobrar');
+			store.getProxy().extraParams={
+				periodo:"",
+				desde:inicio,
+				hasta:fin
+			}
+
+			store.load();
 	}
+
+	,
+	onBusquedaObservacion: function (field, e) {
+
+		obser = Ext.ComponentQuery.query('cuenta_cobrar  #gastomenorfitrobusquedaform #buscarPorObservacionCuentaCobrar' )[0]
+			.getValue();
+			store = Ext.getStore('Cuentas_Cobrar');
+			
+		if (e.getKey() == e.ENTER) {
+
+
+
+			store.getProxy().extraParams = {
+				periodo:"",
+				desde:"",
+				hasta:"",
+				observacion:obser
+
+			};
+			store.loadPage(1);
+			
+
+		}
+
+		if (e.getKey() == e.ENTER && obser == '""') {
+			obser = ""
+
+			store.getProxy().extraParams = {
+				periodo:"",
+				desde:"",
+				hasta:"",
+				observacion:obser
+
+			};
+			store.loadPage(1);
+			
+
+		}
+
+	},
+
+
+	onBusquedaNumero: function (field, e) {
+
+		numero = Ext.ComponentQuery.query('cuenta_cobrar  #gastomenorfitrobusquedaform #buscarPorNumeroCuentaCobrar' )[0]
+			.getValue();
+			store = Ext.getStore('Cuentas_Cobrar');
+			
+		if (e.getKey() == e.ENTER) {
+
+
+
+			store.getProxy().extraParams = {
+				periodo:"",
+				desde:"",
+				hasta:"",
+				observacion:"",
+				numero:numero
+
+			};
+			store.loadPage(1);
+			
+
+		}
+
+		if (e.getKey() == e.ENTER && numero == '""') {
+			numero = ""
+
+			store.getProxy().extraParams = {
+				periodo:"",
+				desde:"",
+				hasta:"",
+				observacion:"",
+				numero : numero
+
+			};
+			store.loadPage(1);
+			
+
+		}
+
+	},
+
+
 
 
 

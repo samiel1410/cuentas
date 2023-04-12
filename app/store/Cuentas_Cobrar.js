@@ -17,7 +17,11 @@ Ext.define('Legion.store.Cuentas_Cobrar',
           extraParams:{
          	inicio:0,
         	limit:25,
-            id_orden:0
+          periodo:"",
+          desde:"",
+				hasta:"",
+                observacion:"",
+                numero:""
         	
      
          	
