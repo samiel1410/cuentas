@@ -101,7 +101,7 @@ $auto_page_break = $pdf->getAutoPageBreak();
 // disable auto-page-break
 $pdf->SetAutoPageBreak(false, 0);
 // set bacground image
-$img_file = '../../../php/clases/pdf/images/mebrete.jpg';
+$img_file = '';
 
 $pdf->Image($img_file, 0, 0, 210, 297, '', '', '', false, 300, '', false, false, 0);
 // restore auto-page-break status
