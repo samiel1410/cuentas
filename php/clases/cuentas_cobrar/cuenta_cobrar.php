@@ -181,25 +181,18 @@ class metodosCuentasCobrar
 
 
 
-    public function seleccionarCuentasCobrar($inicio, $limite,$periodo,$fecha_start,$fecha_end,$observacion,$numero)
+    public function seleccionarCuentasCobrar($inicio, $limite,$periodo,$fecha_start,$fecha_end,$observacion,$numero,$estado,$sucursal,$departamento)
     {
         $conn = conexion();
         $response = new stdClass();
         $data = array();
-        $query = "SELECT id_otra_cuenta_cobrar ,nombre_cliente,numero_otra_cuenta_cobrar,fecha_emision_otra_cuenta_cobrar,numero_documento_otra_cuenta_cobrar,monto_otra_cuenta_cobrar,obs_otra_cuenta_cobrar,estado_otra_cuenta_cobrar,id_fkusuario_otra_cuenta_cobrar,id_fkempleado_emisor_otra_cuenta_cobrar,id_fkcliente_otra_cuenta_cobrar,id_fktipo_documento_otra_cuenta_cobrar,id_fksucursal_otra_cuenta_cobrar,id_fkcentro_costo_otra_cuenta_cobrar,fecha_vcto_otra_cuenta_cobrar,fecha_creacion_otra_cuenta_por_cobrar,nombre_documento_asiento_detalle from otra_cuenta_por_cobrar, cliente, documento_asiento_detalle  where id_fkcliente_otra_cuenta_cobrar = cliente.id_cliente  AND id_fktipo_documento_otra_cuenta_cobrar =  documento_asiento_detalle.id_documento_asiento_detalle";
+        $query = "SELECT id_otra_cuenta_cobrar ,nombre_centro_costo,nombre_sucursal,nombre_cliente,numero_otra_cuenta_cobrar,fecha_emision_otra_cuenta_cobrar,numero_documento_otra_cuenta_cobrar,monto_otra_cuenta_cobrar,obs_otra_cuenta_cobrar,estado_otra_cuenta_cobrar,id_fkusuario_otra_cuenta_cobrar,id_fkempleado_emisor_otra_cuenta_cobrar,id_fkcliente_otra_cuenta_cobrar,id_fktipo_documento_otra_cuenta_cobrar,id_fksucursal_otra_cuenta_cobrar,id_fkcentro_costo_otra_cuenta_cobrar,fecha_vcto_otra_cuenta_cobrar,fecha_creacion_otra_cuenta_por_cobrar,nombre_documento_asiento_detalle from otra_cuenta_por_cobrar, cliente, documento_asiento_detalle,sucursal,centro_costo where id_fkcliente_otra_cuenta_cobrar = cliente.id_cliente AND id_fktipo_documento_otra_cuenta_cobrar = documento_asiento_detalle.id_documento_asiento_detalle AND id_fksucursal_otra_cuenta_cobrar = sucursal.id_sucursal AND id_fkcentro_costo_otra_cuenta_cobrar = centro_costo.id_centro_costo";
 
         
         if($periodo!=0  ){
 
-  
-        
-
             $query .=" AND fecha_emision_otra_cuenta_cobrar BETWEEN '2023-$periodo-01' AND '2023-$periodo-31'";
-         
-
-
-            
-           
+    
         };
 
 
@@ -218,10 +211,27 @@ class metodosCuentasCobrar
        
             $query .=" AND numero_otra_cuenta_cobrar LIKE '%$numero%'";
         };
+
+        if($estado!=""){
+       
+            $query .=" AND estado_otra_cuenta_cobrar = '$estado'";
+        };
+
+        if($departamento!=""){
+       
+            $query .=" AND id_fkcentro_costo_otra_cuenta_cobrar = '$departamento'";
+        };
         
 
-       
+        if($sucursal!=""  ){
+            $query .=" AND id_fksucursal_otra_cuenta_pagar = $sucursal";
+   
+        };
+
         
+
+        
+      
         $sql = mysqli_query($conn, $query);
 
 
@@ -253,7 +263,9 @@ class metodosCuentasCobrar
             $data[$i]['nombre_cliente'] = $vals['nombre_cliente'];
             $data[$i]['nombre_documento_asiento_detalle'] = $vals['nombre_documento_asiento_detalle'];
 
+            $data[$i]['nombre_sucursal'] = $vals['nombre_sucursal'];
 
+            $data[$i]['nombre_centro_costo'] = $vals['nombre_centro_costo'];
 
 
 
@@ -262,5 +274,58 @@ class metodosCuentasCobrar
         }
         $response->data = array_slice($data, $inicio, $limite);
         echo json_encode($response);
+    }
+
+
+
+    public function recuperarTotales(){
+
+
+        $conn = conexion();
+
+        //TOTAL VENCIDO
+        $total_vencido = "Select SUM(monto_otra_cuenta_cobrar) AS total_vencido from otra_cuenta_por_cobrar where fecha_vcto_otra_cuenta_cobrar > NOW();  ";
+        $sql_total_vencido = mysqli_query($conn, $total_vencido);
+        $vals_total = mysqli_fetch_array($sql_total_vencido);
+        $total_vencido =  $vals_total['total_vencido'];
+        if($total_vencido==NULL){
+            $total_vencido=0;
+        }
+
+        //TOTAL_NO_VENCIDO
+
+        $total_no_vencido = "Select SUM(monto_otra_cuenta_cobrar) AS total_no_vencido from otra_cuenta_por_cobrar where fecha_vcto_otra_cuenta_cobrar < NOW();  ";
+        $sql_total_no_vencido = mysqli_query($conn, $total_no_vencido);
+        $vals_no_total = mysqli_fetch_array($sql_total_no_vencido);
+        $total_no_vencido =  $vals_no_total['total_no_vencido'];
+        if($total_no_vencido==NULL){
+            $total_no_vencido=0;
+        }
+
+
+        //TOTAL
+        $total = "Select SUM(monto_otra_cuenta_cobrar) AS total from otra_cuenta_por_cobrar  ";
+        $sql_total = mysqli_query($conn, $total);
+        $vals_total_to = mysqli_fetch_array($sql_total);
+        $total_total =  $vals_total_to['total'];
+        if($total_total==NULL){
+            $total_total=0;
+        }
+      
+            $resp = "Totales ";
+            $arry = array(
+                "success" => true,
+                "respuesta" => $resp,
+                "total_vencido" => $total_vencido,
+                "total_no_vencido"=>$total_no_vencido,
+                "total"=>$total_total
+
+
+
+            );
+        
+
+        echo json_encode($arry);
+
     }
 }

@@ -1,7 +1,7 @@
-Ext.define('Legion.view.cuentas.Cuentas_Cobrar', {
+Ext.define('Legion.view.cuentas.Cuentas_Pagar', {
     extend: 'Ext.TabPanel',
-    alias: 'widget.cuenta_cobrar',
-    title:"CUENTAS POR COBRAR",
+    alias: 'widget.cuenta_pagar',
+    title:"CUENTAS POR PAGAR",
  
     items : [
         //Listado
@@ -23,7 +23,7 @@ Ext.define('Legion.view.cuentas.Cuentas_Cobrar', {
                   items : [{
                         iconCls : 'fas fa-low-vision visualizarTotales',
                         text : 'Mostrar Totales',
-                        itemId : 'btnTotalCuentasPorCobrar',
+                        itemId : 'btnTotalCuentasPorPagar',
                         cls : 'botonNuevo',
                         style : 'background-color:#7beea3;',
                         xtype : 'button'
@@ -34,10 +34,7 @@ Ext.define('Legion.view.cuentas.Cuentas_Cobrar', {
               },
 
               
-
-              
                 {
-                  
                   columnWidth : 0.33,
                   title : '<i class="fas fa-money-bill-alt">  </i>   Total vencido',
                   ui : "light",
@@ -45,32 +42,32 @@ Ext.define('Legion.view.cuentas.Cuentas_Cobrar', {
                   headerPosition : "top",
                   fieldStyle : "text-align:center;",
                   height : 100,
-                  layout : "fit",
                   header : {
                     titleAlign : 'center',
                     cls : "quick-graph-panel shadow"
                   },
+                  layout : "fit",
                   items : [{
                         xtype : "label",
-                        itemId : 'id_total_vencido_cuenta_cobrar',
+                        itemId : 'id_total_vencido_cuenta_pagar',
                         html : '<div align="center" style="font-size:18px;color: Black;font-weight: bold;" ><h2>$--.--</h2></div>'
                       }]
                 }, {
                   columnWidth : 0.33,
                   title : '<i class="fas fa-money-bill-alt">  </i>  Total no vencido',
-                  fieldStyle : "text-align:center;",
                   ui : "light",
-                
+                 
                   headerPosition : "top",
+                  fieldStyle : "text-align:center;",
+                  height : 100,
                   header : {
                     titleAlign : 'center',
                     cls : "quick-graph-panel shadow"
                   },
-                  height : 100,
                   layout : "fit",
                   items : [{
                         xtype : "label",
-                        itemId : 'id_total_no_vencido_cuenta_cobrar',
+                        itemId : 'id_total_no_vencido_cuenta_pagar',
                         html : '<div align="center" style="font-size:18px;color: Black;font-weight: bold;" ><h2>$--.--</h2></div>'
                       }]
                 },
@@ -84,14 +81,14 @@ Ext.define('Legion.view.cuentas.Cuentas_Cobrar', {
                   headerPosition : "top",
                   fieldStyle : "text-align:center;",
                   height : 100,
-                  layout : "fit",
                   header : {
                     titleAlign : 'center',
                     cls : "quick-graph-panel shadow"
                   },
+                  layout : "fit",
                   items : [{
                         xtype : "label",
-                        itemId : 'id_total_cuenta_cobrar',
+                        itemId : 'id_total_cuenta_pagar',
                         html : '<div align="center" style="font-size:18px;color: Black;font-weight: bold;" ><h2>$--.--</h2></div>'
                       }]
                 },
@@ -100,7 +97,7 @@ Ext.define('Legion.view.cuentas.Cuentas_Cobrar', {
                 
                 {
                   columnWidth : 1,
-                  itemId : 'cuentacobrarfitrobusquedaform',
+                  itemId : 'cuentapagarfitrobusquedaform',
                   xtype : 'form',
                   padding : '5 15 0 15',
                   items : [{
@@ -109,9 +106,9 @@ Ext.define('Legion.view.cuentas.Cuentas_Cobrar', {
                               xtype : 'toolbar',
                               dock : 'top',
                               items : [{
-                                    text : "Nueva Cuenta Cobrar",
+                                    text : "Nueva Cuenta Pagar",
                                     iconCls : 'fas fa-plus-circle',
-                                    itemId : 'btnAbrirCuentaCobrar',
+                                    itemId : 'btnAbrirCuentaPagar',
                                     cls : 'botonNuevo',
                                     style : 'background-color:#4f9d40;'
                                   }]
@@ -119,7 +116,7 @@ Ext.define('Legion.view.cuentas.Cuentas_Cobrar', {
                       }, {
                         columnWidth : 1,
                         xtype : 'fieldset',
-                        title : 'Búsqueda cuentas cobrar',
+                        title : 'Búsqueda cuentas pagar',
                         layout : 'column',
                         defaults : {
                           padding : '3'
@@ -132,7 +129,7 @@ Ext.define('Legion.view.cuentas.Cuentas_Cobrar', {
                               columnWidth : 0.33,
                               xtype : 'combo',
                               name : 'comboMes',
-                              itemId : 'comboMesCuentaCobrar',
+                              itemId : 'comboMesCuentaPagar',
                               fieldLabel : 'Periodo',
                               enableKeyEvents : true,
                               editable : false,
@@ -151,7 +148,7 @@ Ext.define('Legion.view.cuentas.Cuentas_Cobrar', {
                               columnWidth : 0.20,
                               xtype : 'datefield',
                               name : 'buscarPorFechaDesde',
-                              itemId : 'buscarPorFechaDesdeCuentaCobrar',
+                              itemId : 'buscarPorFechaDesdeCuentaPagar',
                               format : 'Y-m-d',
                               enableKeyEvents : true,
                               emptyText : "Desde"
@@ -160,7 +157,7 @@ Ext.define('Legion.view.cuentas.Cuentas_Cobrar', {
                               columnWidth : 0.20,
                               xtype : 'datefield',
                               name : 'buscarPorFechaHasta',
-                              itemId : 'buscarPorFechaHastaCuentaCobrar',
+                              itemId : 'buscarPorFechaHastaCuentaPagar',
                               format : 'Y-m-d',
                               enableKeyEvents : true,
                               emptyText : 'Hasta'
@@ -169,7 +166,7 @@ Ext.define('Legion.view.cuentas.Cuentas_Cobrar', {
                               margin : '5 5 0 5',
                               iconCls : 'fas fa-search',
                               text : 'Ver',
-                              itemId : 'btnBuscarPorRangoCuentaCobrar',
+                              itemId : 'btnBuscarPorRangoCuentaPagar',
                               cls : 'botonNuevo',
                               xtype : 'button',
                               style : 'background-color:#3987a8;',
@@ -181,7 +178,7 @@ Ext.define('Legion.view.cuentas.Cuentas_Cobrar', {
                               margin : '5 5 0 5',
                               iconCls : 'fas fa-search',
                               text : 'Limpiar',
-                              itemId : 'btnRefrescarCuentaCobrar',
+                              itemId : 'btnRefrescarCuentaPagar',
                               cls : 'botonNuevo',
                               xtype : 'button',
                               style : 'background-color:#3987a8;',
@@ -191,7 +188,7 @@ Ext.define('Legion.view.cuentas.Cuentas_Cobrar', {
                             {
                               columnWidth : 0.33,
                               xtype : "combo",
-                              itemId : "sucursal_cuenta_cobrar",
+                              itemId : "sucursal_cuenta_pagar",
                               allowBlank : true,
                               editable : false,
                               fieldLabel : 'Sucursal',
@@ -215,13 +212,12 @@ Ext.define('Legion.view.cuentas.Cuentas_Cobrar', {
                             {
                               columnWidth : 0.33,
                               xtype : "combo",
-                              itemId : "departamento_cuenta_cobrar",
+                              itemId : "departamento_cuenta_pagar",
                               name : "centro_costo",
-                              fieldLabel : 'Departamento',
                               allowBlank : true,
                               editable : false,
-                              valueField : 'id',
-                               displayField : 'departamento',
+                              fieldLabel : 'Departamento',
+                              displayField : 'departamento',
                               valueField : 'id_departamento',
                               mode : 'local',
                               triggerAction : 'all',
@@ -239,7 +235,7 @@ Ext.define('Legion.view.cuentas.Cuentas_Cobrar', {
                             {
                               columnWidth : 0.33,
                               xtype : "combo",
-                              itemId : "estado_cuenta_cobrar",
+                              itemId : "estado_cuenta_pagar",
                             
                               allowBlank : true,
                               editable : false,
@@ -251,8 +247,8 @@ Ext.define('Legion.view.cuentas.Cuentas_Cobrar', {
                               triggerAction : 'all',
                               store : new Ext.data.SimpleStore({
                                 fields : ['id', 'estado'],
-                                data : [['TODOS', 'TODOS'],['COBRADA', 'COBRADA'],
-                                    ['NO COBRADA', 'NO COBRADA']
+                                data : [['TODOS', 'TODOS'],['PAGADA', 'PAGADA'],
+                                    ['NO PAGADA', 'NO PAGADA']
           
                                 ]
                               }),
@@ -262,13 +258,13 @@ Ext.define('Legion.view.cuentas.Cuentas_Cobrar', {
                               columnWidth : 0.50,
                               xtype : 'textfield',
                               name : 'buscarPorNumero',
-                              itemId : 'buscarPorNumeroCuentaCobrar',
+                              itemId : 'buscarPorNumeroCuentaPagar',
                               fieldLabel : "Número"
                             },
                             {
                               columnWidth : 0.50,
                               xtype : 'textfield',
-                              itemId : 'buscarPorObservacionCuentaCobrar',
+                              itemId : 'buscarPorObservacionCuentaPagar',
                            
                               fieldLabel : ' Observacion',
                               
@@ -293,7 +289,7 @@ Ext.define('Legion.view.cuentas.Cuentas_Cobrar', {
         
         
                  
-                    store: 'Cuentas_Cobrar',
+                    store: 'Cuentas_Pagar',
                     width: '100%',
         
         
@@ -301,8 +297,8 @@ Ext.define('Legion.view.cuentas.Cuentas_Cobrar', {
         
                     columns: [{
                         text: "Id",
-                        dataIndex: 'id_otra_cuenta_cobrar',
-                        itemId: 'id_otra_cuenta_cobrar',
+                        dataIndex: 'id_otra_cuenta_pagar',
+                      
                         width: 50,
                         hidden: true
                     },
@@ -310,26 +306,26 @@ Ext.define('Legion.view.cuentas.Cuentas_Cobrar', {
                     {
                         text: "NÚMERO",
                         flex: 1,
-                        dataIndex: 'numero_otra_cuenta_cobrar'
+                        dataIndex: 'numero_otra_cuenta_pagar'
         
                     }, 
                     {
-                      text: "CLIENTE",
+                      text: "PROVEEDOR",
                       flex: 1,
-                      dataIndex: 'id_fkcliente_otra_cuenta_cobrar',
+                      dataIndex: 'id_fkproveedor_otra_cuenta_pagar',
                       hidden:true
       
                   },
                   {
-                    text: "CLIENTE",
+                    text: "PROVEDOR",
                     flex: 1,
-                    dataIndex: 'nombre_cliente',
+                    dataIndex: 'nombre_proveedor',
     
                 },
                     {
                       text: "T.DOCUMENTO",
                       flex: 1,
-                      dataIndex: 'id_fktipo_documento_otra_cuenta_cobrar',
+                      dataIndex: 'id_fktipo_documento_otra_cuenta_pagar',
 
                       hidden:true,
       
@@ -346,7 +342,7 @@ Ext.define('Legion.view.cuentas.Cuentas_Cobrar', {
                 },{
                         text: "N.DOCUMENTO",
                         flex: 1,
-                        dataIndex: 'numero_documento_otra_cuenta_cobrar',
+                        dataIndex: 'numero_documento_otra_cuenta_pagar',
         
                         width: 100
         
@@ -354,20 +350,20 @@ Ext.define('Legion.view.cuentas.Cuentas_Cobrar', {
                     {
                       text: "F.EMISIÓN",
                       flex: 1,
-                      dataIndex: 'fecha_emision_otra_cuenta_cobrar'
+                      dataIndex: 'fecha_emision_otra_cuenta_pagar'
       
                   }, 
                     {
                         text: "F.VENC",
                         flex: 1,
-                        dataIndex: 'fecha_vcto_otra_cuenta_cobrar',
+                        dataIndex: 'fecha_vcto_otra_cuenta_pagar',
         
         
                     },
                     {
                         text: "MONTO",
                         flex: 1,
-                        dataIndex: 'monto_otra_cuenta_cobrar',
+                        dataIndex: 'monto_otra_cuenta_pagar',
                         renderer: Ext.util.Format.usMoney
 
         
@@ -375,37 +371,22 @@ Ext.define('Legion.view.cuentas.Cuentas_Cobrar', {
                     {
                         text: "OBS.",
                         flex: 1,
-                        dataIndex: 'obs_otra_cuenta_cobrar'
+                        dataIndex: 'obs_otra_cuenta_pagar'
         
                     },
                    
                     {
                         text: "ESTADO",
                         flex: 1,
-                        dataIndex: 'estado_otra_cuenta_cobrar',
+                        dataIndex: 'estado_otra_cuenta_pagar',
         
         
         
                     },
                     {
-                      text: "SUCURSAL",
-                      flex: 1,
-                      dataIndex: 'nombre_sucursal',
-        
-   
-      
-                  },
-                  {
-                    text: "DEPT.",
-                    flex: 1,
-                    dataIndex: 'nombre_centro_costo',
- 
-    
-                },
-                    {
                         text: "USUARIO",
                         flex: 1,
-                        dataIndex: 'id_fkusuario_otra_cuenta_cobrar',
+                        dataIndex: 'id_fkusuario_otra_cuenta_pagar',
                         hidden:true
         
         
@@ -414,7 +395,7 @@ Ext.define('Legion.view.cuentas.Cuentas_Cobrar', {
                     {
                         text: "EMPLEADO",
                         flex: 1,
-                        dataIndex: 'id_fkempleado_emisor_otra_cuenta_cobrar',
+                        dataIndex: 'id_fkempleado_emisor_otra_cuenta_pagar',
                         hidden:true
         
         
@@ -425,25 +406,43 @@ Ext.define('Legion.view.cuentas.Cuentas_Cobrar', {
                     {
                         text: "DEPT.",
                         flex: 1,
-                        dataIndex: 'id_fkcentro_costo_otra_cuenta_cobrar',
+                        dataIndex: 'id_fkcentro_costo_otra_cuenta_pagar',
                         hidden:true
         
         
         
                     },
+                    {
+                      text: "DEPT.",
+                      flex: 1,
+                      dataIndex: 'nombre_centro_costo',
+                   
+      
+      
+      
+                  },
                     {
                         text: "SUCURSAL",
                         flex: 1,
-                        dataIndex: 'id_fksucursal_otra_cuenta_cobrar',
+                        dataIndex: 'id_fksucursal_otra_cuenta_pagar',
                         hidden:true
         
         
         
                     },
                     {
+                      text: "SUCURSAL",
+                      flex: 1,
+                      dataIndex: 'nombre_sucursal',
+                   
+      
+      
+      
+                  },
+                    {
                         text: "F.CREACION",
                         flex: 1,
-                        dataIndex: 'fecha_creacion_otra_cuenta_por_cobrar',
+                        dataIndex: 'fecha_creacion_otra_cuenta_por_pagar',
                         hidden:true
         
         
@@ -452,7 +451,7 @@ Ext.define('Legion.view.cuentas.Cuentas_Cobrar', {
 
                     {
                       xtype : 'actioncolumn',
-                      itemId : 'action_cuenta_cobrar',
+                      itemId : 'action_cuenta_pagar',
                       width : 75,
                       items : [{
         
@@ -476,17 +475,6 @@ Ext.define('Legion.view.cuentas.Cuentas_Cobrar', {
                           item, e, record, row);
         
                         }
-                      },
-                      {
-                        tooltip : 'PDF',
-                        iconCls : 'x-fa fa-search',
-                        itemId : 'eliminar_forma',
-                        handler : function(view, rowIndex, colIndex,
-                          item, e, record, row) {
-                          this.fireEvent('btnPDF', view, rowIndex, colIndex,
-                          item, e, record, row);
-        
-                        }
                       }
         
                       ]
@@ -495,7 +483,7 @@ Ext.define('Legion.view.cuentas.Cuentas_Cobrar', {
                       bbar: [{
                         flex: 1,
                         xtype: 'pagingtoolbar',
-                        store: 'Cuentas_Cobrar',
+                        store: 'Cuentas_Pagar',
                         displayInfo: true,
                         displayMsg: 'Displaying {0} to {1} of {2} &nbsp;records ',
                         emptyMsg: "No records to display&nbsp;",
@@ -508,7 +496,7 @@ Ext.define('Legion.view.cuentas.Cuentas_Cobrar', {
         //Formulario
 ,
         {
-            title:'Nueva cuenta Cobrar',
+            title:'Nueva cuenta Pagar',
             tabConfig: {
                 hidden: true
             },
@@ -519,13 +507,13 @@ Ext.define('Legion.view.cuentas.Cuentas_Cobrar', {
                     items : [{
                           xtype : 'label',
                           style : 'font-size:20px;font-weight:bold;color:green;',
-                          text : 'INGRESO CUENTAS COBRAR'
+                          text : 'INGRESO CUENTAS PAGAR'
                         }, {
                           xtype : 'toolbar',
                           items : ['->', 
                                {
                                 text : "Atrás",
-                                itemId : 'btnRegresarVista',
+                                itemId : 'btnRegresarVistaPagar',
                                 iconCls : 'fas fa-caret-square-left',
                                 cls : 'botonGuardar',
                                 style : 'background-color:#96f5e8'
@@ -536,7 +524,7 @@ Ext.define('Legion.view.cuentas.Cuentas_Cobrar', {
                     columnWidth : 0.6,
                     xtype : 'fieldset',
                     itemId : '_gasto_menor',
-                    title : 'NUEVO CUENTA A COBRAR:',
+                    title : 'NUEVO CUENTA A PAGAR:',
                     style : {
                       background : 'White'
                     },
@@ -547,7 +535,7 @@ Ext.define('Legion.view.cuentas.Cuentas_Cobrar', {
                     },
           
                     items : [{
-                          itemId : 'agregarCuentaCobrarForm',
+                          itemId : 'agregarCuentaPagarForm',
                           xtype : 'form',
                           padding : '5 0 5 0',
                           layout : 'column',
@@ -560,9 +548,9 @@ Ext.define('Legion.view.cuentas.Cuentas_Cobrar', {
                             {
                                 columnWidth : 0.85,
                                 xtype : 'textfield',
-                                fieldLabel : 'id_cliente',
-                                itemId :'id_otra_cuenta_cobrar',
-                                name : 'id_otra_cuenta_cobrar',
+                                fieldLabel : 'id',
+                                itemId :'id_otra_cuenta_pagar',
+                                name : 'id_otra_cuenta_pagar',
                                value:"",
                                 editable : false,
                                 hidden:true,
@@ -573,8 +561,8 @@ Ext.define('Legion.view.cuentas.Cuentas_Cobrar', {
                                 columnWidth : 0.85,
                                 xtype : 'textfield',
                                 fieldLabel : 'id_cliente',
-                                itemId : 'id_fkcliente_otra_cuenta_cobrar',
-                                name : 'id_fkcliente_otra_cuenta_cobrar',
+                                itemId : 'id_fkproveedor_otra_cuenta_pagar',
+                                name : 'id_fkproveedor_otra_cuenta_pagar',
                                 allowBlank : false,
                                 editable : false,
                                 hidden:true,
@@ -584,8 +572,8 @@ Ext.define('Legion.view.cuentas.Cuentas_Cobrar', {
                               {
                                 columnWidth : 0.85,
                                 xtype : 'textfield',
-                                fieldLabel : 'Cliente',
-                                itemId : 'nombre_cliente',
+                                fieldLabel : 'Provedor',
+                                itemId : 'nombre_proveedor',
                                
                                 allowBlank : false,
                                 editable : false,
@@ -598,8 +586,8 @@ Ext.define('Legion.view.cuentas.Cuentas_Cobrar', {
                                 columnWidth : 0.85,
                                 xtype : 'textfield',
                                 fieldLabel : 'Cliente',
-                                itemId : 'numero_otra_cuenta_cobrar',
-                                name : 'numero_otra_cuenta_cobrar',
+                                itemId : 'numero_otra_cuenta_pagar',
+                                name : 'numero_otra_cuenta_pagar',
                                 hidden:true,
                                 
                                 editable : false,
@@ -612,13 +600,13 @@ Ext.define('Legion.view.cuentas.Cuentas_Cobrar', {
                                 columnWidth : 0.15,
                                 xtype : 'button',
                                 margin:'0 5 0 5',
-                                text:'Clientes',
+                                text:'Provedores',
                                 width: 64,
                                 height:30 ,
                                 iconCls : 'x-fa fa-search',
                                 itemId : 'btnListadoClientes',
                                 handler : function() {
-                                    this.fireEvent('listadoClientes');
+                                    this.fireEvent('listadoProvedores');
                                 }
                               },
                               
@@ -626,9 +614,9 @@ Ext.define('Legion.view.cuentas.Cuentas_Cobrar', {
                               {
                                 columnWidth : 0.33,
                                 xtype : 'datefield',
-                                name : 'fecha_emision_otra_cuenta_cobrar',
-                                itemId : 'fecha_emision_otra_cuenta_cobrar',
-                                
+                                name : 'fecha_emision_otra_cuenta_pagar',
+                                itemId : 'fecha_emision_otra_cuenta_pagar',
+                                                                 
                                 labelAlign : 'top',
                                 fieldLabel : 'Fecha',
                                 allowBlank : false,
@@ -640,8 +628,8 @@ Ext.define('Legion.view.cuentas.Cuentas_Cobrar', {
                                 xtype : 'combo',
                                 fieldLabel : ' Documento',
                                 margin:'0 0 0 5',
-                                itemId : 'id_fktipo_documento_otra_cuenta_cobrar',
-                                name : 'id_fktipo_documento_otra_cuenta_cobrar',
+                                itemId : 'id_fktipo_documento_otra_cuenta_pagar',
+                                name : 'id_fktipo_documento_otra_cuenta_pagar',
                                 labelAlign : 'top',
                                 allowBlank : false,
                                 editable : false,
@@ -661,11 +649,11 @@ Ext.define('Legion.view.cuentas.Cuentas_Cobrar', {
                                 listeners : {
                                     change : function(fld, newValue, oldValue, opts) {
                                       if (newValue == 1) {
-                                        Ext.ComponentQuery.query('cuenta_cobrar form#agregarCuentaCobrarForm textfield#numero_documento_otra_cuenta_cobrar')[0].setValue("0");
-                                        Ext.ComponentQuery.query('cuenta_cobrar form#agregarCuentaCobrarForm textfield#numero_documento_otra_cuenta_cobrar')[0].setDisabled(true);
+                                        Ext.ComponentQuery.query('cuenta_pagar form#agregarCuentaPagarForm textfield#numero_documento_otra_cuenta_pagar')[0].setValue("0");
+                                        Ext.ComponentQuery.query('cuenta_pagar form#agregarCuentaPagarForm textfield#numero_documento_otra_cuenta_pagar')[0].setDisabled(true);
                                       } else {
-                                        Ext.ComponentQuery.query('cuenta_cobrar form#agregarCuentaCobrarForm textfield#numero_documento_otra_cuenta_cobrar')[0].setValue("");
-                                        Ext.ComponentQuery.query('cuenta_cobrar form#agregarCuentaCobrarForm textfield#numero_documento_otra_cuenta_cobrar')[0].setDisabled(false);
+                                        Ext.ComponentQuery.query('cuenta_pagar form#agregarCuentaPagarForm textfield#numero_documento_otra_cuenta_pagar')[0].setValue("");
+                                        Ext.ComponentQuery.query('cuenta_pagar form#agregarCuentaPagarForm textfield#numero_documento_otra_cuenta_pagar')[0].setDisabled(false);
                                       }
                                     }
                                   },
@@ -675,15 +663,16 @@ Ext.define('Legion.view.cuentas.Cuentas_Cobrar', {
                                 columnWidth : 0.33,
                                 xtype : 'textfield',
                                 labelAlign : 'top',
-                                name : 'numero_documento_otra_cuenta_cobrar',
-                                itemId :'numero_documento_otra_cuenta_cobrar',
+                                name : 'numero_documento_otra_cuenta_pagar',
+                                itemId :'numero_documento_otra_cuenta_pagar',
                                 fieldLabel : 'Nº Dcto.',
                                 allowBlank : false,
                                 margin:'0 0 0 5',
                                 maxLength : 200,
                                 enforceMaxLength : true,
                                 maskRe : /[0-9.]/,
-                                disabled : false,
+                                disabled : true,
+                                value:0,
                                 
                               }, {
                                 columnWidth : 0.33,
@@ -691,8 +680,8 @@ Ext.define('Legion.view.cuentas.Cuentas_Cobrar', {
                                 labelAlign : 'top',
                                 fieldLabel : 'Monto',
                                 margin:'0 0 0 0',
-                                itemId : 'monto_otra_cuenta_cobrar',
-                                name : 'monto_otra_cuenta_cobrar',
+                                itemId : 'monto_otra_cuenta_pagar',
+                                name : 'monto_otra_cuenta_pagar',
                                 allowBlank : false,
                                 maxLength : 200,
                                 enforceMaxLength : true,
@@ -702,8 +691,8 @@ Ext.define('Legion.view.cuentas.Cuentas_Cobrar', {
                                 columnWidth : 0.33,
                                 fieldLabel : 'Sucursal',
                                 labelAlign : 'top',
-                                itemId : 'id_fksucursal_otra_cuenta_cobrar',
-                                name : 'id_fksucursal_otra_cuenta_cobrar',
+                                itemId : 'id_fksucursal_otra_cuenta_pagar',
+                                name : 'id_fksucursal_otra_cuenta_pagar',
                                 margin : '0 0 0 5',
                                 xtype : 'combo',
                                 dock : 'top',
@@ -730,8 +719,8 @@ Ext.define('Legion.view.cuentas.Cuentas_Cobrar', {
                               
                                 labelAlign : 'top',
                                 fieldLabel : 'Departamento',
-                                itemId : 'id_fkcentro_costo_otra_cuenta_cobrar',
-                                name : 'id_fkcentro_costo_otra_cuenta_cobrar',
+                                itemId : 'id_fkcentro_costo_otra_cuenta_pagar',
+                                name : 'id_fkcentro_costo_otra_cuenta_pagar',
                                 margin : '0 0 0 5',
                                 enableKeyEvents : true,
                                 editable : false,
@@ -755,8 +744,8 @@ Ext.define('Legion.view.cuentas.Cuentas_Cobrar', {
                                 xtype : 'datefield',
                                 labelAlign : 'top',
                                 format : 'Y-m-d',
-                                name : 'fecha_vcto_otra_cuenta_cobrar',
-                                itemId : 'fecha_vcto_otra_cuenta_cobrar',
+                                name : 'fecha_vcto_otra_cuenta_pagar',
+                                itemId : 'fecha_vcto_otra_cuenta_pagar',
                                 allowBlank : false,
                                 fieldLabel : 'Fecha de Vencimiento',
                                
@@ -768,8 +757,8 @@ Ext.define('Legion.view.cuentas.Cuentas_Cobrar', {
                                 columnWidth : 0.70,
                                 xtype : 'textfield',
                                 labelAlign : 'top',
-                                name : 'obs_otra_cuenta_cobrar',
-                                itemId : 'obs_otra_cuenta_cobrar',
+                                name : 'obs_otra_cuenta_pagar',
+                                itemId : 'obs_otra_cuenta_pagar',
                                 margin:'0 0 0 5',
                                 fieldLabel : 'Observación',
                                 allowBlank : true,
@@ -782,7 +771,7 @@ Ext.define('Legion.view.cuentas.Cuentas_Cobrar', {
                                 items : ['->', {
                                       text : "Guardar",
                                       iconCls : 'far fa-save',
-                                      itemId : 'btnGuardarCuentaCobrar',
+                                      itemId : 'btnGuardarCuentaPagar',
                                       scale : 'medium',
                                       cls : 'botonGuardar',
                                       style : 'background-color:#4f9d40;'

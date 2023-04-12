@@ -26,7 +26,8 @@ Ext.define('Legion.view.main.Main', {
 		'Legion.view.ordenpedido.OrdenWindowReporte',
 		'Legion.view.forma_pago.FormaWindowReporte',
 		'Legion.view.inicio.Inicio',
-		'Legion.view.inscripcion_web.InscripcionesWeb','Legion.view.cuentas.Cuentas_Cobrar'
+		'Legion.view.inscripcion_web.InscripcionesWeb','Legion.view.cuentas.Cuentas_Cobrar',
+		'Legion.view.cuentas.Cuentas_Pagar'
 		
 
 

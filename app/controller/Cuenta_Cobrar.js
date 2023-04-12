@@ -1,7 +1,7 @@
 Ext.define('Legion.controller.Cuenta_Cobrar', {
 	extend: 'Ext.app.Controller',
 	
-	views: ['Legion.view.cuentas.Cuentas_Cobrar','Legion.view.cuentas.ListadoProvedor'],
+	views: ['Legion.view.cuentas.Cuentas_Cobrar','Legion.view.cuentas.ListadoCliente'],
 
 	
 
@@ -17,10 +17,19 @@ Ext.define('Legion.controller.Cuenta_Cobrar', {
 				specialkey: this.onBusquedaNumero
 			},
 
-			'#boton_refresh_forma': {
-				btnRefresh: this.onRefresh
+			'#btnRefrescarCuentaCobrar': {
+				click: this.onRefresh
 
 			},
+
+			'#sucursal_cuenta_cobrar':{
+				change: this.onBusquedaSucursal
+			},
+
+			'#departamento_cuenta_cobrar':{
+				change: this.onBusquedaDepartamento
+			},
+
 
 
 			'#btnAbrirCuentaCobrar': {
@@ -41,13 +50,20 @@ Ext.define('Legion.controller.Cuenta_Cobrar', {
 			},
 			'#action_cuenta_cobrar':{
 				btnDelete : this.onEliminarCuentaCobrar,
-				btnUpdate: this.onEditarCuentaCobrar
+				btnUpdate: this.onEditarCuentaCobrar,
+				btnPDF: this.onCargarPDF
 			},
 			'#comboMesCuentaCobrar':{
 				change : this.onBusquedaPeriodo
 			},
 			'#btnBuscarPorRangoCuentaCobrar':{
 				click : this.onBusquedaRango
+			},
+			'#estado_cuenta_cobrar':{
+				change: this.onBusquedaEstado
+			},
+			'#btnTotalCuentasPorCobrar':{
+				click: this.onCargarTotales
 			}
 
 		});
@@ -236,7 +252,7 @@ Ext.define('Legion.controller.Cuenta_Cobrar', {
 
 	onBusquedaPeriodo : function(){
 
-		periodo = Ext.ComponentQuery.query('cuenta_cobrar  #gastomenorfitrobusquedaform #comboMesCuentaCobrar' )[0]
+		periodo = Ext.ComponentQuery.query('cuenta_cobrar  #cuentacobrarfitrobusquedaform #comboMesCuentaCobrar' )[0]
 			.getValue();
 
 			store = Ext.getStore('Cuentas_Cobrar');
@@ -244,23 +260,33 @@ Ext.define('Legion.controller.Cuenta_Cobrar', {
 				periodo:periodo,
 				desde:"",
 				hasta:"",
+				observacion:"",
+				estado: "",
+				numero:"",
+				sucursal:"",
+				departamento:""
 			}
 
 			store.load();
 
 	},
 	onBusquedaRango : function(){
-		inicio = Ext.ComponentQuery.query('cuenta_cobrar  #gastomenorfitrobusquedaform #buscarPorFechaDesdeCuentaCobrar' )[0]
+		inicio = Ext.ComponentQuery.query('cuenta_cobrar  #cuentacobrarfitrobusquedaform #buscarPorFechaDesdeCuentaCobrar' )[0]
 			.getValue();
 
-			fin = Ext.ComponentQuery.query('cuenta_cobrar  #gastomenorfitrobusquedaform #buscarPorFechaHastaCuentaCobrar' )[0]
+			fin = Ext.ComponentQuery.query('cuenta_cobrar  #cuentacobrarfitrobusquedaform #buscarPorFechaHastaCuentaCobrar' )[0]
 			.getValue();
 
 			store = Ext.getStore('Cuentas_Cobrar');
 			store.getProxy().extraParams={
 				periodo:"",
 				desde:inicio,
-				hasta:fin
+				hasta:fin,
+				observacion:"",
+				estado: "",
+				numero:"",
+				sucursal:"",
+				departamento:""
 			}
 
 			store.load();
@@ -269,7 +295,7 @@ Ext.define('Legion.controller.Cuenta_Cobrar', {
 	,
 	onBusquedaObservacion: function (field, e) {
 
-		obser = Ext.ComponentQuery.query('cuenta_cobrar  #gastomenorfitrobusquedaform #buscarPorObservacionCuentaCobrar' )[0]
+		obser = Ext.ComponentQuery.query('cuenta_cobrar  #cuentacobrarfitrobusquedaform #buscarPorObservacionCuentaCobrar' )[0]
 			.getValue();
 			store = Ext.getStore('Cuentas_Cobrar');
 			
@@ -281,7 +307,12 @@ Ext.define('Legion.controller.Cuenta_Cobrar', {
 				periodo:"",
 				desde:"",
 				hasta:"",
-				observacion:obser
+				observacion:obser,
+				estado: "",
+				numero:"",
+				sucursal:"",
+				departamento:""
+
 
 			};
 			store.loadPage(1);
@@ -296,7 +327,11 @@ Ext.define('Legion.controller.Cuenta_Cobrar', {
 				periodo:"",
 				desde:"",
 				hasta:"",
-				observacion:obser
+				observacion:obser,
+				estado: "",
+				numero:"",
+				sucursal:"",
+				departamento:""
 
 			};
 			store.loadPage(1);
@@ -309,7 +344,7 @@ Ext.define('Legion.controller.Cuenta_Cobrar', {
 
 	onBusquedaNumero: function (field, e) {
 
-		numero = Ext.ComponentQuery.query('cuenta_cobrar  #gastomenorfitrobusquedaform #buscarPorNumeroCuentaCobrar' )[0]
+		numero = Ext.ComponentQuery.query('cuenta_cobrar  #cuentacobrarfitrobusquedaform #buscarPorNumeroCuentaCobrar' )[0]
 			.getValue();
 			store = Ext.getStore('Cuentas_Cobrar');
 			
@@ -322,7 +357,10 @@ Ext.define('Legion.controller.Cuenta_Cobrar', {
 				desde:"",
 				hasta:"",
 				observacion:"",
-				numero:numero
+				numero:numero,
+				estado: "",
+				sucursal:"",
+				departamento:""
 
 			};
 			store.loadPage(1);
@@ -338,7 +376,10 @@ Ext.define('Legion.controller.Cuenta_Cobrar', {
 				desde:"",
 				hasta:"",
 				observacion:"",
-				numero : numero
+				numero : numero,
+				estado: "",
+				sucursal:"",
+				departamento:""
 
 			};
 			store.loadPage(1);
@@ -347,6 +388,238 @@ Ext.define('Legion.controller.Cuenta_Cobrar', {
 		}
 
 	},
+
+	onBusquedaEstado: function(){
+
+		
+		estado = Ext.ComponentQuery.query('cuenta_cobrar  #cuentacobrarfitrobusquedaform #estado_cuenta_cobrar' )[0]
+			.getValue();
+
+			store = Ext.getStore('Cuentas_Cobrar');
+
+
+			store.getProxy().extraParams = {
+				periodo:"",
+				desde:"",
+				hasta:"",
+				observacion:"",
+				numero:"",
+				estado: estado,
+				sucursal:"",
+				departamento:""
+
+			};
+			store.loadPage(1);
+			
+
+	},
+	onRefresh: function(){
+
+		Ext.ComponentQuery.query('cuenta_cobrar  #cuentacobrarfitrobusquedaform #estado_cuenta_cobrar' )[0]
+			.reset();
+
+			Ext.ComponentQuery.query('cuenta_cobrar  #cuentacobrarfitrobusquedaform #buscarPorNumeroCuentaCobrar' )[0]
+			.reset();
+
+			  Ext.ComponentQuery.query('cuenta_cobrar  #cuentacobrarfitrobusquedaform #buscarPorFechaDesdeCuentaCobrar' )[0]
+			  .reset();
+
+			 Ext.ComponentQuery.query('cuenta_cobrar  #cuentacobrarfitrobusquedaform #buscarPorFechaHastaCuentaCobrar' )[0]
+			 .reset();
+
+			 Ext.ComponentQuery.query('cuenta_cobrar  #cuentacobrarfitrobusquedaform #buscarPorFechaDesdeCuentaCobrar' )[0]
+			 .reset();
+
+			 Ext.ComponentQuery.query('cuenta_cobrar  #cuentacobrarfitrobusquedaform #comboMesCuentaCobrar' )[0]
+			 .reset();
+
+			 Ext.ComponentQuery.query('cuenta_cobrar  #cuentacobrarfitrobusquedaform #comboMesCuentaCobrar' )[0]
+			 .reset();
+
+
+			 Ext.ComponentQuery.query('cuenta_cobrar  #cuentacobrarfitrobusquedaform #sucursal_cuenta_cobrar' )[0]
+			 .reset();
+
+			 Ext.ComponentQuery.query('cuenta_cobrar  #cuentacobrarfitrobusquedaform #departamento_cuenta_cobrar' )[0]
+			 .reset();
+
+
+			 
+			 Ext.ComponentQuery.query('cuenta_cobrar  #cuentacobrarfitrobusquedaform #buscarPorObservacionCuentaCobrar' )[0]
+			 .reset();
+
+
+
+
+	store = Ext.getStore('Cuentas_Cobrar');
+
+	store.getProxy().extraParams = {
+		periodo:"",
+		desde:"",
+		hasta:"",
+		observacion:"",
+		numero:"",
+		estado: "",
+		sucursal:"",
+		departamento:""
+
+	};
+	store.load();
+
+
+
+
+			
+
+	},
+
+	onCargarTotales: function(){
+
+		
+		Ext.Ajax.request({
+			url : 'php/negocios/cuentas_cobrar/recuperraTotales.php',
+			method : 'POST',
+			
+
+			success : function(response) {
+
+				var response_aux = Ext.util.JSON
+				.decode(response.responseText, true);
+				console.log(response_aux)
+
+				Ext.ComponentQuery.query('cuenta_cobrar   #id_total_vencido_cuenta_cobrar' )[0]
+				.setText("$"+response_aux.total_vencido );
+
+				Ext.ComponentQuery.query('cuenta_cobrar   #id_total_no_vencido_cuenta_cobrar' )[0]
+				.setText("$"+response_aux.total_no_vencido );
+
+
+				Ext.ComponentQuery.query('cuenta_cobrar   #id_total_cuenta_cobrar' )[0]
+				.setText("$"+response_aux.total );
+			
+			
+
+				Ext.ComponentQuery.query("cuenta_cobrar   #id_total_vencido_cuenta_cobrar")[0].setHtml('<div align="center" style="font-size:18px;color: Red;font-weight: bold;" ><h2>$' + response_aux.total_vencido+ '</h2></div>', true);
+				Ext.ComponentQuery.query("cuenta_cobrar   #id_total_no_vencido_cuenta_cobrar")[0].setHtml('<div align="center" style="font-size:18px;color: Black;font-weight: bold;" ><h2>$' + response_aux.total_no_vencido + '</h2></div>', true);
+				Ext.ComponentQuery.query("cuenta_cobrar   #id_total_cuenta_cobrar")[0].setHtml('<div align="center" style="font-size:18px;color: Blue;font-weight: bold;" ><h2>$' + response_aux.total + '</h2></div>', true);
+
+			
+			}
+
+		}
+
+		);
+
+		 
+		
+
+	},
+	onBusquedaSucursal: function(){
+
+		sucursal = Ext.ComponentQuery.query('#cuentacobrarfitrobusquedaform   #sucursal_cuenta_cobrar' )[0]
+			 .getValue();
+
+			 store = Ext.getStore('Cuentas_Cobrar');
+
+			 store.getProxy().extraParams = {
+				 periodo:"",
+				 desde:"",
+				 hasta:"",
+				 observacion:"",
+				 numero:"",
+				 estado: "",
+				 sucursal:sucursal,
+				 departamento:""
+		 
+			 };
+		 
+			 store.load();
+
+	}
+
+
+	,
+	onBusquedaDepartamento: function(){
+		departamento = Ext.ComponentQuery.query('#cuentacobrarfitrobusquedaform   #departamento_cuenta_cobrar' )[0]
+			 .getValue();
+
+			 store = Ext.getStore('Cuentas_Cobrar');
+
+			 store.getProxy().extraParams = {
+				 periodo:"",
+				 desde:"",
+				 hasta:"",
+				 observacion:"",
+				 numero:"",
+				 estado: "",
+				 sucursal:"",
+				 departamento:departamento
+		 
+			 };
+		 
+			 store.load();
+
+	},
+	onCargarPDF: function(view, rowIndex, colIndex,
+		item, e, record, row){
+
+		
+
+							numero = record.data.numero_otra_cuenta_cobrar;
+							cliente= record.data.nombre_cliente;
+							tipo_documento = record.data.nombre_documento_asiento_detalle;
+							numero_documento =record.data.numero_documento_otra_cuenta_cobrar;
+							fecha_emision =record.data.fecha_emision_otra_cuenta_cobrar;
+							fecha_venc =record.data.fecha_vcto_otra_cuenta_cobrar;
+							monto = record.data.monto_otra_cuenta_cobrar;
+							observacion = record.data.obs_otra_cuenta_cobrar;
+							estado = record.data.estado_otra_cuenta_cobrar;
+							sucursal = record.data.nombre_sucursal;
+							departamento = record.data.nombre_centro_costo;
+		
+						var window2= Ext.create('Ext.window.Window', {
+							title : 'Comprobante Cobro'+" #"+numero,
+							layout: {
+								align: 'middle',
+								pack: 'center',
+								type: 'hbox'
+							},
+							height:500,
+							width:600,
+							modal : true,
+							listeners: {
+								show: function() {
+								  var myFrame = Ext.create('Ext.Component', {
+									height:600,
+							width:600,
+									autoEl: {
+									  tag: 'iframe',
+									  src: 'php/negocios/reportes/comprobante_cuenta_cobrar.php?numero='+numero+'&cliente='+cliente+'&tipo_documento='+tipo_documento+'&numero_documento='+numero_documento+'&fecha_emision='+fecha_emision+'&fecha_venc='+fecha_venc+'&monto='+monto+'&observacion='+observacion+'&departamento='+departamento+'&sucursal='+sucursal+'&estado='+estado
+									}
+								  });
+								  this.add(myFrame);
+								}
+							  }
+							
+				
+					});
+					window2.show();
+	
+
+						
+
+
+						
+						
+
+						
+
+
+				}
+			
+
+	
+
 
 
 

@@ -8,8 +8,8 @@ Ext.define('Legion.Application', {
       'Legion.view.login.Login',
       'Legion.view.main.Main'
     ],
-    stores:['Usuario','Sucursal','Curso','Instructor','Sucursal','Alumno','FormaPago','Inscripcion','AlumnoNoInscrito','Mensualidad','InscripcionMensualidades','OrdenPedido','AlumnoInscripto','MensualidadesAlumno','DatosOrden','Comprobante','Empresa','Provincia','Canton','Certificaciones','CertificacionesEdit','AlumnoInscripciones','HistorialCertificados','InscripcionesWeb','InscripcionesAlumno','Cuentas_Cobrar'],
-    controllers:['UsuarioController','CursoController','InstructorController','SucursalController','AlumnoController','FormaController','InscripcionController','MensualidadController','OrdenPedidoController','InicionController','InscripcionWeb','Cuenta_Cobrar'],
+    stores:['Usuario','Sucursal','Curso','Instructor','Sucursal','Alumno','FormaPago','Inscripcion','AlumnoNoInscrito','Mensualidad','InscripcionMensualidades','OrdenPedido','AlumnoInscripto','MensualidadesAlumno','DatosOrden','Comprobante','Empresa','Provincia','Canton','Certificaciones','CertificacionesEdit','AlumnoInscripciones','HistorialCertificados','InscripcionesWeb','InscripcionesAlumno','Cuentas_Cobrar','Cuentas_Pagar'],
+    controllers:['UsuarioController','CursoController','InstructorController','SucursalController','AlumnoController','FormaController','InscripcionController','MensualidadController','OrdenPedidoController','InicionController','InscripcionWeb','Cuenta_Cobrar','Cuenta_Pagar'],
    
 
     controller: {
