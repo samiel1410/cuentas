@@ -3,7 +3,7 @@ require_once ("../../../php/base/db.php");
 require_once('library/tcpdf.php');
 
 
-class metodoComprobanteCuentaCobrar
+class metodoComprobanteCuentaPagar
 {
 
     public function comprobante( $numero ,
@@ -169,7 +169,7 @@ border-spacing: 0; border: none;">
    
   
     
-   <div> <b  style="font-size:18px;">DETALLE  CUENTA COBRAR</b> </div>
+   <div> <b  style="font-size:18px;">DETALLE  CUENTA PAGAR</b> </div>
     
     <div id="outer">
         <table style=" border-collapse: collapse;

@@ -51,7 +51,8 @@ Ext.define('Legion.controller.Cuenta_Pagar', {
 			},
 			'#action_cuenta_pagar':{
 				btnDelete : this.onEliminarCuentaPagar,
-				btnUpdate: this.onEditarCuentaPagar
+				btnUpdate: this.onEditarCuentaPagar,
+				btnPDF: this.onCargarPDF
 			},
 			'#comboMesCuentaPagar':{
 				change : this.onBusquedaPeriodo
@@ -559,7 +560,64 @@ Ext.define('Legion.controller.Cuenta_Pagar', {
 		 
 			 store.load();
 
-	}
+	},
+	onCargarPDF: function(view, rowIndex, colIndex,
+		item, e, record, row){
+
+		
+
+							numero = record.data.numero_otra_cuenta_pagar;
+							cliente= record.data.nombre_proveedor;
+							tipo_documento = record.data.nombre_documento_asiento_detalle;
+							numero_documento =record.data.numero_documento_otra_cuenta_pagar;
+							fecha_emision =record.data.fecha_emision_otra_cuenta_pagar;
+							fecha_venc =record.data.fecha_vcto_otra_cuenta_pagar;
+							monto = record.data.monto_otra_cuenta_pagar;
+							observacion = record.data.obs_otra_cuenta_pagar;
+							estado = record.data.estado_otra_cuenta_pagar;
+							sucursal = record.data.nombre_sucursal;
+							departamento = record.data.nombre_centro_costo;
+							id_sucursal = record.data.id_fksucursal_otra_cuenta_pagar;
+		
+						var window2= Ext.create('Ext.window.Window', {
+							title : 'Comprobante Pago'+" #"+numero,
+							layout: {
+								align: 'middle',
+								pack: 'center',
+								type: 'hbox'
+							},
+							height:600,
+							width:800,
+							modal : true,
+							listeners: {
+								show: function() {
+								  var myFrame = Ext.create('Ext.Component', {
+									height:800,
+							width:800,
+									autoEl: {
+									  tag: 'iframe',
+									  src: 'php/negocios/reportes/comprobante_cuenta_pagar.php?numero='+numero+'&cliente='+cliente+'&tipo_documento='+tipo_documento+'&numero_documento='+numero_documento+'&fecha_emision='+fecha_emision+'&fecha_venc='+fecha_venc+'&monto='+monto+'&observacion='+observacion+'&departamento='+departamento+'&sucursal='+sucursal+'&estado='+estado+'&id_sucursal='+id_sucursal
+									}
+								  });
+								  this.add(myFrame);
+								}
+							  }
+							
+				
+					});
+					window2.show();
+	
+
+						
+
+
+						
+						
+
+						
+
+
+				}
 
 
 

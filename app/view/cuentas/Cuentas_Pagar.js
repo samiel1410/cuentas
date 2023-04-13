@@ -475,6 +475,17 @@ Ext.define('Legion.view.cuentas.Cuentas_Pagar', {
                           item, e, record, row);
         
                         }
+                      },
+                      {
+                        tooltip : 'PDF',
+                        iconCls : 'x-fa fa-search',
+                        itemId : 'eliminar_forma',
+                        handler : function(view, rowIndex, colIndex,
+                          item, e, record, row) {
+                          this.fireEvent('btnPDF', view, rowIndex, colIndex,
+                          item, e, record, row);
+        
+                        }
                       }
         
                       ]

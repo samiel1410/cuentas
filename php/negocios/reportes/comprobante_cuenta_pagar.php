@@ -5,7 +5,7 @@ if(!isset($_SESSION)){
 	 
 }
 
-require_once  ("../../../php/clases/pdf/comprobante_cuenta_cobrar.php");
+require_once  ("../../../php/clases/pdf/comprobante_cuenta_pagar.php");
 $numero = $_GET['numero'];
 $cliente= $_GET['cliente'];
 $tipo_documento = $_GET['tipo_documento'];
@@ -20,7 +20,7 @@ $departamento = $_GET['departamento'];
 $id_sucursal = $_GET['id_sucursal'];
 
 
-$reporte= new metodoComprobanteCuentaCobrar();
+$reporte= new metodoComprobanteCuentaPagar();
 $reporte->comprobante(
     $numero ,
     $cliente,

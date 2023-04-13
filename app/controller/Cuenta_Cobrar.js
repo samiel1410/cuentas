@@ -576,6 +576,7 @@ Ext.define('Legion.controller.Cuenta_Cobrar', {
 							estado = record.data.estado_otra_cuenta_cobrar;
 							sucursal = record.data.nombre_sucursal;
 							departamento = record.data.nombre_centro_costo;
+							id_sucursal = record.data.id_fksucursal_otra_cuenta_cobrar;
 		
 						var window2= Ext.create('Ext.window.Window', {
 							title : 'Comprobante Cobro'+" #"+numero,
@@ -584,17 +585,17 @@ Ext.define('Legion.controller.Cuenta_Cobrar', {
 								pack: 'center',
 								type: 'hbox'
 							},
-							height:500,
-							width:600,
+							height:600,
+							width:800,
 							modal : true,
 							listeners: {
 								show: function() {
 								  var myFrame = Ext.create('Ext.Component', {
-									height:600,
-							width:600,
+									height:800,
+							width:800,
 									autoEl: {
 									  tag: 'iframe',
-									  src: 'php/negocios/reportes/comprobante_cuenta_cobrar.php?numero='+numero+'&cliente='+cliente+'&tipo_documento='+tipo_documento+'&numero_documento='+numero_documento+'&fecha_emision='+fecha_emision+'&fecha_venc='+fecha_venc+'&monto='+monto+'&observacion='+observacion+'&departamento='+departamento+'&sucursal='+sucursal+'&estado='+estado
+									  src: 'php/negocios/reportes/comprobante_cuenta_cobrar.php?numero='+numero+'&cliente='+cliente+'&tipo_documento='+tipo_documento+'&numero_documento='+numero_documento+'&fecha_emision='+fecha_emision+'&fecha_venc='+fecha_venc+'&monto='+monto+'&observacion='+observacion+'&departamento='+departamento+'&sucursal='+sucursal+'&estado='+estado+'&id_sucursal='+id_sucursal
 									}
 								  });
 								  this.add(myFrame);
